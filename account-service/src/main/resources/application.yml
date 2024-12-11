@@ -1,0 +1,32 @@
+axon:
+  eventhandling:
+    processors:
+      default:
+        mode: tracking                # Utiliser le TrackingEventProcessor
+        thread-count: 4                # Nombre de threads pour traiter les événements en parallèle
+        batch-size: 100                # Taille du lot d'événements traités à chaque cycle d'interrogation
+
+
+resilience4j:
+  ratelimiter:
+    instances:
+      rateLimiterCustomer:
+        limitForPeriod: 2
+        timeoutDuration: 2s
+        limitRefreshPeriod: 20
+  circuitbreaker:
+    instances:
+      circuitBreakercustomer:
+        failure-rate-threshold: 60
+        wait-duration-in-open-state: 5ms
+        automatic-transition-from-open-to-half-open-enabled: true
+        max-wait-duration-in-half-open-state: 3s
+        permitted-number-of-calls-in-half-open-state: 3
+
+
+
+
+
+
+
+
